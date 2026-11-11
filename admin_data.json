@@ -1,0 +1,325 @@
+{
+ "updated": "2026-11-12 00:11:22",
+ "stats": {
+  "total": 21,
+  "active": 21,
+  "vip": 9,
+  "banned": 0
+ },
+ "users": [
+  {
+   "name": "114514",
+   "vipType": "月卡",
+   "vipExpire": "2054-03-28",
+   "daysLeft": 9997,
+   "kami": "",
+   "regAt": 1794410590801,
+   "lastSeen": 1794413332591,
+   "banned": false
+  },
+  {
+   "name": "annchk",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794413171055,
+   "lastSeen": 1794413171055,
+   "banned": false
+  },
+  {
+   "name": "v2test2805",
+   "vipType": "月卡",
+   "vipExpire": "2026-12-12",
+   "daysLeft": 29,
+   "kami": "YCM2FXJ02",
+   "regAt": 1794412828140,
+   "lastSeen": 1794412834569,
+   "banned": false
+  },
+  {
+   "name": "778891",
+   "vipType": "月卡",
+   "vipExpire": "2026-12-11",
+   "daysLeft": 28,
+   "kami": "YCMPJF1Q2",
+   "regAt": 1794412397026,
+   "lastSeen": 1794412815621,
+   "banned": false
+  },
+  {
+   "name": "phone12562",
+   "vipType": "月卡",
+   "vipExpire": "2026-12-11",
+   "daysLeft": 28,
+   "kami": "YCMZDUK0B",
+   "regAt": 1794412578997,
+   "lastSeen": 1794412583411,
+   "banned": false
+  },
+  {
+   "name": "phonetest1",
+   "vipType": "月卡",
+   "vipExpire": "2026-12-11",
+   "daysLeft": 28,
+   "kami": "YCMDMBAEQ",
+   "regAt": 0,
+   "lastSeen": 1794412553852,
+   "banned": false
+  },
+  {
+   "name": "070616",
+   "vipType": "会员",
+   "vipExpire": "2054-03-28",
+   "daysLeft": 9997,
+   "kami": "",
+   "regAt": 1794399618374,
+   "lastSeen": 1794412487923,
+   "banned": false
+  },
+  {
+   "name": "userA",
+   "vipType": "年卡",
+   "vipExpire": "2027-11-11",
+   "daysLeft": 363,
+   "kami": "YCYDEEER1",
+   "regAt": 0,
+   "lastSeen": 1794412292136,
+   "banned": false
+  },
+  {
+   "name": "e2e19",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794412122765,
+   "lastSeen": 1794412122765,
+   "banned": false
+  },
+  {
+   "name": "e2e94",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794412004621,
+   "lastSeen": 1794412005812,
+   "banned": false
+  },
+  {
+   "name": "lktest",
+   "vipType": "年卡",
+   "vipExpire": "2027-11-11",
+   "daysLeft": 363,
+   "kami": "",
+   "regAt": 1794411882283,
+   "lastSeen": 1794411886380,
+   "banned": false
+  },
+  {
+   "name": "redeem9",
+   "vipType": "月卡",
+   "vipExpire": "2026-12-11",
+   "daysLeft": 28,
+   "kami": "",
+   "regAt": 1794411118064,
+   "lastSeen": 1794411880274,
+   "banned": false
+  },
+  {
+   "name": "finalchk",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794411801114,
+   "lastSeen": 1794411801114,
+   "banned": false
+  },
+  {
+   "name": "phonecheck",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794411655827,
+   "lastSeen": 1794411655827,
+   "banned": false
+  },
+  {
+   "name": "wxhxy",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794410626742,
+   "lastSeen": 1794411322250,
+   "banned": false
+  },
+  {
+   "name": "redeem1",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794411102541,
+   "lastSeen": 1794411115065,
+   "banned": false
+  },
+  {
+   "name": "fe254",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 0,
+   "lastSeen": 1794411064719,
+   "banned": false
+  },
+  {
+   "name": "mt3",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794410441693,
+   "lastSeen": 1794410441693,
+   "banned": false
+  },
+  {
+   "name": "mt2",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794410439318,
+   "lastSeen": 1794410439318,
+   "banned": false
+  },
+  {
+   "name": "mt1",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794410437559,
+   "lastSeen": 1794410437559,
+   "banned": false
+  },
+  {
+   "name": "123456",
+   "vipType": "",
+   "vipExpire": "",
+   "daysLeft": 0,
+   "kami": "",
+   "regAt": 1794400765354,
+   "lastSeen": 1794400765369,
+   "banned": false
+  }
+ ],
+ "orders": [
+  {
+   "order": "O94405331123",
+   "plan": "月卡",
+   "amount": 10.09,
+   "status": "pending",
+   "user": "launch",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94404498544",
+   "plan": "月卡",
+   "amount": 10.37,
+   "status": "pending",
+   "user": "070616",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94403245827",
+   "plan": "月卡",
+   "amount": 10.35,
+   "status": "paid",
+   "user": "x",
+   "ts": null,
+   "kami": "YCB3PIKENY",
+   "auto": null
+  },
+  {
+   "order": "O94403197613",
+   "plan": "月卡",
+   "amount": 10.03,
+   "status": "pending",
+   "user": "d",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94400803207",
+   "plan": "月卡",
+   "amount": 9.9,
+   "status": "pending",
+   "user": "123456",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94399275325",
+   "plan": "月卡",
+   "amount": 9.9,
+   "status": "pending",
+   "user": "070616",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94355195184",
+   "plan": "月卡",
+   "amount": 9.9,
+   "status": "pending",
+   "user": "ui3",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94355172837",
+   "plan": "月卡",
+   "amount": 9.9,
+   "status": "pending",
+   "user": "ui2",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94355156677",
+   "plan": "月卡",
+   "amount": 9.9,
+   "status": "pending",
+   "user": "ui",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  },
+  {
+   "order": "O94354391397",
+   "plan": "月卡",
+   "amount": 9.9,
+   "status": "pending",
+   "user": "t",
+   "ts": null,
+   "kami": "",
+   "auto": null
+  }
+ ],
+ "kamiFree": 54,
+ "kamiUsed": 5
+}

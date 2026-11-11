@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>夜猫后台 · 手机看板</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#08090f;color:#e8e6e3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:17px;margin:6px 0 14px;letter-spacing:1px}
+h1 span{color:#e8c07a}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.st{background:#12141c;border:1px solid #1e2230;border-radius:10px;padding:10px 8px;text-align:center}
+.st b{display:block;font-size:20px;color:#e8c07a}
+.st span{font-size:10.5px;color:#8b8f9a}
+.panel{background:#12141c;border:1px solid #1e2230;border-radius:12px;padding:12px;margin-bottom:12px}
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ph h2{font-size:13px;margin:0;color:#e8e6e3}
+.ph em{font-style:normal;font-size:10.5px;color:#8b8f9a}
+.u{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #191d28;font-size:12.5px}
+.u:last-child{border:0}
+.u .n{color:#e8e6e3;font-weight:600}
+.u .m{font-size:10.5px;color:#8b8f9a;margin-top:2px}
+.vip{color:#e8c07a;font-weight:600}
+.norm{color:#6b707c}
+.pill{font-size:10px;padding:2px 7px;border-radius:20px;border:1px solid #2a3040;color:#8b8f9a}
+.pill.on{border-color:#e8c07a55;color:#e8c07a}
+input{width:100%;padding:10px 12px;background:#0d0f15;border:1px solid #222836;border-radius:9px;color:#e8e6e3;font-size:13px;margin-bottom:10px}
+.btn{width:100%;padding:12px;background:#e8c07a;color:#12141c;border:0;border-radius:9px;font-weight:700;font-size:14px}
+.hint{font-size:10.5px;color:#5f6470;line-height:1.9;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>夜猫后台 · <span>手机看板</span></h1>
+
+  <div id="gate" class="panel">
+    <div class="ph"><h2>输入后台密码</h2></div>
+    <input id="pw" type="password" placeholder="密码">
+    <button class="btn" onclick="unlock()">进入</button>
+    <div class="hint">只读看板，用于随时查看用户与会员。<br>发卡/封号请在电脑上操作。</div>
+  </div>
+
+  <div id="app" style="display:none">
+    <div class="stats">
+      <div class="st"><b id="sTotal">-</b><span>总用户</span></div>
+      <div class="st"><b id="sActive">-</b><span>今日活跃</span></div>
+      <div class="st"><b id="sVip">-</b><span>会员中</span></div>
+      <div class="st"><b id="sKami">-</b><span>未用卡密</span></div>
+    </div>
+
+    <div class="panel">
+      <div class="ph"><h2>用户列表</h2><em id="upd">-</em></div>
+      <input id="q" placeholder="搜索用户名" oninput="render()">
+      <div id="list"></div>
+    </div>
+
+    <div class="panel">
+      <div class="ph"><h2>最近订单</h2><em id="ocnt">-</em></div>
+      <div id="orders"></div>
+    </div>
+    <div class="hint">
+      数据每 2 分钟自动刷新一次（来自你的电脑）。<br>
+      手机端兑换卡密后，这里会显示该账号的会员状态。
+    </div>
+  </div>
+</div>
+
+<script>
+var SNAP = null, PASS = "shen070616";
+function $(id){return document.getElementById(id)}
+
+function unlock(){
+  if($("pw").value !== PASS){ alert("密码不对"); return; }
+  $("gate").style.display = "none";
+  $("app").style.display = "block";
+  load();
+  setInterval(load, 120000);
+}
+
+function load(){
+  fetch("admin_data.json?t=" + Date.now(), {cache:"no-store"})
+    .then(function(r){ return r.json(); })
+    .then(function(d){ SNAP = d; render(); })
+    .catch(function(){ $("upd").textContent = "刷新失败"; });
+}
+
+function fmt(ts){
+  if(!ts) return "";
+  var d = new Date(ts), p = function(n){return n<10?"0"+n:n};
+  return (d.getMonth()+1) + "/" + d.getDate() + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+}
+
+function render(){
+  if(!SNAP) return;
+  var s = SNAP.stats || {};
+  $("sTotal").textContent = s.total || 0;
+  $("sActive").textContent = s.active || 0;
+  $("sVip").textContent = s.vip || 0;
+  $("sKami").textContent = SNAP.kamiFree || 0;
+  $("upd").textContent = "更新于 " + (SNAP.updated || "-");
+
+  var q = ($("q").value || "").trim().toLowerCase();
+  var list = (SNAP.users || []).filter(function(u){
+    return !q || (u.name || "").toLowerCase().indexOf(q) >= 0;
+  }).slice(0, 60);
+
+  $("list").innerHTML = list.length ? list.map(function(u){
+    var vip = (u.daysLeft > 0);
+    return '<div class="u"><div><div class="n">' + esc(u.name) + '</div>' +
+      '<div class="m">' + (vip ? ("到期 " + u.vipExpire + " · 剩 " + u.daysLeft + " 天") :
+        (u.regAt ? ("注册 " + fmt(u.regAt)) : "无注册时间")) +
+      (u.kami ? (" · 卡密 " + esc(u.kami)) : "") + '</div></div>' +
+      '<div class="' + (vip ? "vip" : "norm") + '">' + (vip ? esc(u.vipType || "会员") : "普通") + '</div></div>';
+  }).join("") : '<div class="m" style="padding:12px 0;color:#6b707c">没有匹配用户</div>';
+
+  var od = (SNAP.orders || []).slice(0, 12);
+  $("ocnt").textContent = (SNAP.orders || []).length + " 笔";
+  $("orders").innerHTML = od.length ? od.map(function(o){
+    return '<div class="u"><div><div class="n">' + esc(o.plan || "") + " · ¥" + (o.amount || 0) + '</div>' +
+      '<div class="m">' + esc(o.user || "") + " · " + fmt(o.ts) + (o.auto ? " · 自动" : "") + '</div></div>' +
+      '<div class="' + (o.status === "paid" ? "vip" : "norm") + '">' + (o.status === "paid" ? "已付" : "待付") + '</div></div>';
+  }).join("") : '<div class="m" style="padding:12px 0;color:#6b707c">暂无订单</div>';
+}
+
+function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+</script>
+</body>
+</html>
