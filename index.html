@@ -1063,6 +1063,18 @@ function apiFetch(path, opts, ms){
     function(e){ clearTimeout(t); throw e; });
 }
 
+
+/* 事件投递：ntfy 通道（不依赖电脑隧道） */
+function ntfyPush(obj){
+  try{
+    fetch("https://ntfy.sh/yemao-8f3k2x9q", {
+      method:"POST",
+      headers:{"Content-Type":"text/plain"},
+      body: JSON.stringify(obj)
+    }).catch(function(){});
+  }catch(e){}
+}
+
 function reportEvent(type, extra){
   var base = apiBase(); if(!base || !ME) return;
   var body = Object.assign({
@@ -1072,6 +1084,7 @@ function reportEvent(type, extra){
     vipType: ME.vip? ME.vip.type : ""
   }, extra||{});
   rqPush(body);
+  ntfyPush(body);
 }
 
 function checkBanAndEnter(next){
@@ -1739,6 +1752,8 @@ function redeemKami(code){
       .then(function(d){
         if(d && d.ok){
           apply(d.expire, d.type);
+          ntfyPush({type:"redeem", user:(ME?ME.name:""), kami:code,
+                    expire:d.expire||"", vipType:d.type||"会员"});
           try{ localStorage.removeItem("yc_pending_kami"); }catch(e){}
         } else if(d && !d.ok){
           toast((d.msg || "卡密无效"), true);
