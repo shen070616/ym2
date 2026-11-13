@@ -1593,24 +1593,29 @@ let DLID=null, DLTIMER=null;
 function startDL(name, url){
   if(typeof reportEvent==='function') reportEvent('download', {file:name});
   addDlRecord(name);
-  openSheet(`
-    <h3>开始下载</h3>
-    <div class="st">${esc(name)}</div>
-    <div class="dlwrap">
-      <div class="dlbar"><i id="dlprog" style="width:0%"></i></div>
-      <div class="dlmeta"><span id="dlpct">0%</span><span id="dlspeed">准备中…</span></div>
-      <div class="dlsub" id="dlsub">保存到：下载\夜猫游戏库</div>
-    </div>
-    <div class="note" style="text-align:center">下载完成后到该文件夹解压即可<br>解压路径请用全英文</div>
-    <button class="big" onclick="openDLDir()">打开下载文件夹</button>
-  `);
-  fetch("/dl/start",{method:"POST",headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({name:name.replace(/[\/:*?"<>|]/g,"_")+guessExt(url), url:url})})
-    .then(r=>r.json()).then(d=>{
-      if(!d.ok){ $("dlspeed").textContent="启动失败"; return; }
-      DLID=d.id; pollDL();
-    }).catch(()=>{ $("dlspeed").textContent="无法连接本地下载服务"; });
+
+  // 手机端：直接用浏览器打开下载链接（GitHub 走加速镜像）
+  var direct = url;
+  if(/^https?:\/\/(github\.com|objects\.githubusercontent\.com)/i.test(url)){
+    direct = "https://gh-proxy.com/" + url;
+  }
+  var isApk = /\.apk(\?|$)/i.test(url);
+
+  openSheet(
+    "<h3>开始下载</h3>" +
+    "<div class='st'>" + esc(name) + "</div>" +
+    "<div class='dlwrap'>" +
+      "<div class='dlmeta' style='justify-content:center'><span id='dlspeed'>已打开浏览器下载…</span></div>" +
+      "<div class='dlsub' id='dlsub'>" + (isApk ? "APK 会保存到手机「下载」文件夹，点开安装即可" : "文件会保存到手机「下载」文件夹") + "</div>" +
+    "</div>" +
+    "<button class='big' onclick=\"window.open('" + direct.replace(/'/g, "%27") + "','_blank')\">没反应？点这里手动下载</button>" +
+    "<div class='note' style='text-align:center'>下载慢属正常，等它跑完<br>APK 安装前请先在设置里允许「安装未知来源应用」</div>"
+  );
+  try{ window.open(direct, "_blank"); }catch(e){}
+  var el=document.getElementById("dlspeed");
+  if(el) el.textContent = "已打开下载链接";
 }
+
 function guessExt(u){
   const m=(u.split("?")[0]).match(/\.(7z|zip|rar|exe|apk|iso|tar|gz)$/i);
   return m? "."+m[1] : "";
